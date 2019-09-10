@@ -4,4 +4,4 @@ export {
   default as countrySelectionTick,
 } from './assets/images/CountrySelectTick/countrySelectTick.png';
 
-export { default as countries } from './assets/data/country.json';
+export { default as countries } from './assets/data/countries.js';

@@ -9,17 +9,23 @@ import { searchIcon, countrySelectionTick, countries } from './Constants';
  * Item view
  * @param {*} params
  */
-const ItemView = (params) => {  
-  let text = `${params.item.name} (+${params.item.callingCode})`;
+const ItemView = (props) => {
+  let textToRender = props.item.name
+  if (props.showCallingCode) {
+    textToRender = textToRender + ` (+${props.item.callingCode})`
+  }
+  if (props.showCurrency) {
+    textToRender = textToRender + ` (${props.item.currency})`
+  }
   let selected = null;
-  if (params.selected != null && params.selected.callingCode === params.item.callingCode) {
+  if (props.selected != null && props.selected.callingCode === props.item.callingCode) {
     selected = <Image source={countrySelectionTick} style={styles.selectionTick} />;
   }
   return (
     <View style={styles.itemContainer}>
-      <TouchableOpacity style={styles.itemTextContainer} onPress={() => params.action(params.item)}>
-        <Image source={{ uri: params.item.flag }} style={styles.flag} />
-        <Text numberOfLines={1} style={styles.itemText}>{text}</Text>
+      <TouchableOpacity style={styles.itemTextContainer} onPress={() => props.action(props.item)}>
+        <Image source={{ uri: props.item.flag }} style={styles.flag} />
+        <Text numberOfLines={1} style={styles.itemText}>{textToRender}</Text>
         <View style={styles.selectionView}>
           { selected }
         </View>
@@ -50,7 +56,7 @@ export default class CountrySelection extends React.Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.generateSectionData(countries);
   }
 
@@ -66,7 +72,7 @@ export default class CountrySelection extends React.Component {
    * Generate section data from country list
    */
   generateSectionData(countryList) {
-    const sections = [];    
+    const sections = [];
     const sectionHeaders = countryList.map(data => data.name.charAt(0));
     const uniqueHeaders = Array.from(new Set(sectionHeaders));
 
@@ -78,12 +84,19 @@ export default class CountrySelection extends React.Component {
   }
 
   render() {
-    const { selected, action } = this.props;
+    const {
+      showCallingCode,
+      showCurrency,
+      selected,
+      onSelect,
+      containerStyles,
+      searchContainerStyles,
+    } = this.props;
     const { sections } = this.state;
 
     return (
-      <View style={styles.container}>
-        <View style={styles.searchContainer}>
+      <View style={[styles.container, containerStyles]}>
+        <View style={[styles.searchContainer, searchContainerStyles]}>
           <View style={styles.searchView}>
             <Image source={searchIcon} style={styles.searchIcon} />
             <TextInput
@@ -102,8 +115,10 @@ export default class CountrySelection extends React.Component {
               item={item}
               index={index}
               section={section}
-              action={(item) => action(item)}
+              action={(item) => onSelect(item)}
               selected={selected}
+              showCallingCode={showCallingCode}
+              showCurrency={showCurrency}
             />
           )}
           renderSectionHeader={({ section: { title } }) => (<SectionHeader title={title} />)}
