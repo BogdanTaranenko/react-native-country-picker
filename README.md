@@ -3,5 +3,5 @@
 ## Installation
 
 ```bash
-$ yarn add react-native-country-picker
+$ yarn add @b.taranenko/react-native-country-picker
 ```
