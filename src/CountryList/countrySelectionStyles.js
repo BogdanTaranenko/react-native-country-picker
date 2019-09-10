@@ -5,11 +5,6 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  imageBackground: {
-    resizeMode: 'contain',
-    width: '100%',
-    height: '100%',
-  },
   searchContainer: {
     height: 83,
     backgroundColor: '#f4f4f4',
@@ -60,22 +55,12 @@ export default StyleSheet.create({
   },
   itemSeparator: {
     height: 1,
-    marginLeft: 20,
+    marginLeft: 10,
     backgroundColor: '#bdbdbd30',
     marginBottom: 0,
   },
-  flag: {
-    width: 30,
-    height: 30,
-    marginHorizontal: 20,
-    borderRadius: 15,
-  },
-  selectionTick: {
-    width: 20,
-    height: 20,
-    marginRight: 20,
-  },
-  selectionView: {
-    alignItems: 'flex-end',
+  emoji: {
+    marginLeft: 10,
+    marginRight: 5
   },
 });
