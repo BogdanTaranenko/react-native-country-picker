@@ -42,10 +42,13 @@ export default class CountrySelection extends React.Component {
     this.state = {
       sections: [],
     };
+    this.searchInput = null
   }
 
   componentDidMount () {
+    const { shouldFocusOnMount } = this.props
     this.generateSectionData(countries);
+    if (shouldFocusOnMount && this.searchInput) this.searchInput.focus()
   }
 
   onChangeSearchText = (text) => {
@@ -91,6 +94,7 @@ export default class CountrySelection extends React.Component {
             <View style={styles.searchView}>
               <Image source={SearchIcon} style={styles.searchIcon} />
               <TextInput
+                ref={(input) => this.searchInput = input}
                 style={[styles.textInput, searchTextInputStyles]}
                 placeholder='Search'
                 placeholderTextColor="#2d2926"
