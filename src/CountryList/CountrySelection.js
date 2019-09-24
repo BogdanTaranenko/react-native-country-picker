@@ -52,7 +52,12 @@ export default class CountrySelection extends React.Component {
   }
 
   onChangeSearchText = (text) => {
-    const filtered = countries.filter(country => country.name.toLowerCase().indexOf(text.toLowerCase()) > -1);
+    const filtered = countries.filter(country => {
+      return (
+        country.name.toLowerCase().indexOf(text.toLowerCase()) > - 1 ||
+        country.currency.toLowerCase().indexOf(text.toLowerCase()) > - 1
+      )
+    });
     this.generateSectionData(filtered);
   }
 

@@ -1,6 +1,6 @@
 {
   "name": "@b.taranenko/react-native-country-picker",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "React native country picker",
   "main": "index.js",
   "scripts": {
