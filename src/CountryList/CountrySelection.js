@@ -112,6 +112,7 @@ export default class CountrySelection extends React.Component {
           ) : null}
         </View>
         <SectionList
+          keyboardShouldPersistTaps='always'
           renderItem={({ item, index, section }) => {
             if (renderItem) return renderItem({ item, index, section })
             return (
