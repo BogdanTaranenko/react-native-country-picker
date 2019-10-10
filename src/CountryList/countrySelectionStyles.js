@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { I18nManager, StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   container: {
@@ -11,7 +11,7 @@ export default StyleSheet.create({
   },
   searchView: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
     backgroundColor: '#bdbdbd30',
     borderWidth: 0,
     borderRadius: 6,
@@ -24,7 +24,7 @@ export default StyleSheet.create({
     marginHorizontal: 10,
   },
   textInput: {
-    flex: 1,
+    textAlign: I18nManager.isRTL ? 'right' : 'left',
   },
   sectionContainer: {
     height: 36,
@@ -34,25 +34,24 @@ export default StyleSheet.create({
   sectionHeader: {
     marginHorizontal: 20,
     fontSize: 15,
-    textAlign: 'left',
+    textAlign: I18nManager.isRTL ? 'right' : 'left',
     fontWeight: 'bold',
     color: '#2d292670',
   },
   itemContainer: {
     height: 45,
-    backgroundColor: '#ffffff',
-    justifyContent: 'flex-end',
+    justifyContent: I18nManager.isRTL ? 'flex-start' : 'flex-start',
   },
   itemTextContainer: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
     alignItems: 'center',
   },
   itemText: {
     fontSize: 15,
     fontWeight: 'normal',
     color: '#444444',
-    flex: 1,
+    // textAlign: 'left',
   },
   itemSeparator: {
     height: 1,
@@ -62,6 +61,6 @@ export default StyleSheet.create({
   },
   emoji: {
     marginLeft: 10,
-    marginRight: 5
+    marginRight: 10
   },
 });
