@@ -101,10 +101,7 @@ export default class CountrySelection extends React.Component {
               <TextInput
                 ref={(input) => this.searchInput = input}
                 style={[styles.textInput, searchTextInputStyles]}
-                placeholder='Search'
-                placeholderTextColor="#2d2926"
                 enablesReturnKeyAutomatically
-                clearButtonMode="while-editing"
                 onChangeText={text => this.onChangeSearchText(text)}
                 {...searchTextInputProps}
               />
