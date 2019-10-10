@@ -32,8 +32,9 @@ export default StyleSheet.create({
     justifyContent: 'center',
   },
   sectionHeader: {
-    marginLeft: 20,
+    marginHorizontal: 20,
     fontSize: 15,
+    textAlign: 'left',
     fontWeight: 'bold',
     color: '#2d292670',
   },
