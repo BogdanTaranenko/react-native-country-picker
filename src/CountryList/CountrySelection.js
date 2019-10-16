@@ -2,7 +2,7 @@ import React from 'react';
 import {
   View, TextInput, Image, SectionList, Text, TouchableOpacity,
 } from 'react-native';
-import { SearchIcon, countries } from './Constants';
+import { SearchIcon, countries, currencyCountries } from './Constants';
 import styles from './countrySelectionStyles';
 
 const ItemView = (props) => {
@@ -47,12 +47,17 @@ export default class CountrySelection extends React.Component {
 
   componentDidMount () {
     const { shouldFocusOnMount } = this.props
-    this.generateSectionData(countries);
+    this.generateSectionData(this.dataSource);
     if (shouldFocusOnMount && this.searchInput) this.searchInput.focus()
   }
 
+  get dataSource () {
+    const { showCurrency } = this.props
+    return showCurrency ? currencyCountries: countries
+  }
+
   onChangeSearchText = (text) => {
-    const filtered = countries.filter(country => {
+    const filtered = this.dataSource.filter(country => {
       return (
         country.name.toLowerCase().indexOf(text.toLowerCase()) > - 1 ||
         country.currency.toLowerCase().indexOf(text.toLowerCase()) > - 1

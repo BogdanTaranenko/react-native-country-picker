@@ -1,6 +1,6 @@
 {
   "name": "@b.taranenko/react-native-country-picker",
-  "version": "0.0.10",
+  "version": "0.0.12",
   "description": "React native country picker",
   "main": "index.js",
   "scripts": {
@@ -29,6 +29,7 @@
     "metro-react-native-babel-preset": "0.56.0"
   },
   "dependencies": {
-    "countries-list": "2.4.3"
+    "countries-list": "2.4.3",
+    "lodash": "4.17.15"
   }
 }
