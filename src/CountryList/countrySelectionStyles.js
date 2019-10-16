@@ -24,6 +24,7 @@ export default StyleSheet.create({
     marginHorizontal: 10,
   },
   textInput: {
+    ...(!I18nManager.isRTL ? { flex: 1 } : {}),
     textAlign: I18nManager.isRTL ? 'right' : 'left',
   },
   sectionContainer: {
