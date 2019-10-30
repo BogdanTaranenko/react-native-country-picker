@@ -11,11 +11,13 @@ export default StyleSheet.create({
   },
   searchView: {
     flex: 1,
+    height: '50%',
     flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
     backgroundColor: '#bdbdbd30',
     borderWidth: 0,
     borderRadius: 6,
     margin: 20,
+    ...(!I18nManager.isRTL ? { marginRight: 0 } : { marginLeft: 0 }),
     alignItems: 'center',
   },
   searchIcon: {

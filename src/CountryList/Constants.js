@@ -1,6 +1,7 @@
 import { countries as rawCountries } from 'countries-list'
 import { uniqBy } from 'lodash'
 export { default as SearchIcon } from './assets/images/SearchIcon/searchIcon.png';
+export { default as CloseIcon } from './assets/images/CloseIcon/close.png';
 
 const formattedCountries = Object.keys(rawCountries)
   .map(countryCode => {

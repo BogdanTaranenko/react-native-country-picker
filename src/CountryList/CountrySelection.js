@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import {
   View, TextInput, Image, SectionList, Text, TouchableOpacity,
 } from 'react-native';
-import { SearchIcon, countries, currencyCountries } from './Constants';
+import { SearchIcon, CloseIcon, countries, currencyCountries } from './Constants';
 import styles from './countrySelectionStyles';
 
 const ItemView = (props) => {
@@ -88,12 +88,14 @@ export default class CountrySelection extends React.Component {
       showCallingCode,
       showCurrency,
       onSelect,
+      onClose,
       containerStyles,
       renderItem,
       itemContainerStyles,
       itemTextContainerStyles,
       itemEmojiStyles,
       itemTextStyles,
+      emptyPlaceholderText,
     } = this.props;
     const { sections } = this.state;
 
@@ -101,41 +103,52 @@ export default class CountrySelection extends React.Component {
       <View style={[styles.container, containerStyles]}>
         <View style={[styles.searchContainer, searchContainerStyles]}>
           {showSearch ? (
-            <View style={styles.searchView}>
-              <Image source={SearchIcon} style={styles.searchIcon} />
-              <TextInput
-                ref={(input) => this.searchInput = input}
-                style={[styles.textInput, searchTextInputStyles]}
-                enablesReturnKeyAutomatically
-                onChangeText={text => this.onChangeSearchText(text)}
-                {...searchTextInputProps}
-              />
+            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', }}>
+              <View style={styles.searchView}>
+                <Image source={SearchIcon} style={styles.searchIcon} />
+                <TextInput
+                  ref={(input) => this.searchInput = input}
+                  style={[styles.textInput, searchTextInputStyles]}
+                  enablesReturnKeyAutomatically
+                  onChangeText={text => this.onChangeSearchText(text)}
+                  {...searchTextInputProps}
+                />
+              </View>
+              <TouchableOpacity hitSlop={{ top: 10, right: 10, bottom: 10, left: 10 }} onPress={onClose}>
+                <Image source={CloseIcon} style={[styles.searchIcon, { marginHorizontal: 15 } ]} />
+              </TouchableOpacity>
             </View>
           ) : null}
         </View>
-        <SectionList
-          keyboardShouldPersistTaps='always'
-          renderItem={({ item, index, section }) => {
-            if (renderItem) return renderItem({ item, index, section })
-            return (
-              <ItemView
-                item={item}
-                index={index}
-                section={section}
-                onSelect={(item) => onSelect(item)}
-                showCallingCode={showCallingCode}
-                showCurrency={showCurrency}
-                itemContainerStyles={itemContainerStyles}
-                itemTextContainerStyles={itemTextContainerStyles}
-                itemEmojiStyles={itemEmojiStyles}
-                itemTextStyles={itemTextStyles}
-              />
-            )
-          }}
-          renderSectionHeader={({ section: { title } }) => (<SectionHeader title={title} />)}
-          sections={sections}
-          keyExtractor={(item) => item.code}
-        />
+        {sections && sections.length ? (
+          <SectionList
+            keyboardShouldPersistTaps='always'
+            renderItem={({ item, index, section }) => {
+              if (renderItem) return renderItem({ item, index, section })
+              return (
+                <ItemView
+                  item={item}
+                  index={index}
+                  section={section}
+                  onSelect={(item) => onSelect(item)}
+                  showCallingCode={showCallingCode}
+                  showCurrency={showCurrency}
+                  itemContainerStyles={itemContainerStyles}
+                  itemTextContainerStyles={itemTextContainerStyles}
+                  itemEmojiStyles={itemEmojiStyles}
+                  itemTextStyles={itemTextStyles}
+                />
+              )
+            }}
+            renderSectionHeader={({ section: { title } }) => (<SectionHeader title={title} />)}
+            sections={sections}
+            keyExtractor={(item) => item.code}
+          />
+        ) : (
+          <View style={{ flex: 1, alignItems: 'center' }}>
+            <Text style={{ fontSize: 24, fontWeight: 'bold', marginTop: 30 }}>{emptyPlaceholderText || 'No search results'}</Text>
+          </View>
+        )}
       </View>
     );
   }
