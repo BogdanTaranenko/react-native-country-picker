@@ -52,8 +52,12 @@ export default class CountrySelection extends React.Component {
   }
 
   get dataSource () {
-    const { showCurrency } = this.props
-    return showCurrency ? currencyCountries: countries
+    const { showCurrency, countryCodesWhiteList } = this.props
+    const dataSource = showCurrency ? currencyCountries: countries
+    if (!countryCodesWhiteList || !countryCodesWhiteList.length) {
+      return dataSource
+    }
+    return dataSource.filter(country => countryCodesWhiteList.includes(country.code))
   }
 
   onChangeSearchText = (text) => {
