@@ -24,9 +24,16 @@ export default StyleSheet.create({
     width: 16,
     height: 16,
     marginHorizontal: 10,
+    position: 'absolute',
+  },
+  closeIcon: {
+    width: 16,
+    height: 16,
+    marginHorizontal: 15,
   },
   textInput: {
     ...(!I18nManager.isRTL ? { flex: 1 } : {}),
+    paddingHorizontal: 36,
     textAlign: I18nManager.isRTL ? 'right' : 'left',
   },
   sectionContainer: {

@@ -119,7 +119,7 @@ export default class CountrySelection extends React.Component {
                 />
               </View>
               <TouchableOpacity hitSlop={{ top: 10, right: 10, bottom: 10, left: 10 }} onPress={onClose}>
-                <Image source={CloseIcon} style={[styles.searchIcon, { marginHorizontal: 15 } ]} />
+                <Image source={CloseIcon} style={styles.closeIcon} />
               </TouchableOpacity>
             </View>
           ) : null}
