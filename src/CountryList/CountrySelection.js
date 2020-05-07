@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import {
-  View, TextInput, Image, SectionList, Text, TouchableOpacity,
+  View, TextInput, Image, SectionList, Text, TouchableOpacity, InteractionManager,
 } from 'react-native';
 import { SearchIcon, CloseIcon, countries, currencyCountries } from './Constants';
 import styles from './countrySelectionStyles';
@@ -48,7 +48,11 @@ export default class CountrySelection extends React.Component {
   componentDidMount () {
     const { shouldFocusOnMount } = this.props
     this.generateSectionData(this.dataSource);
-    if (shouldFocusOnMount && this.searchInput) this.searchInput.focus()
+    if (shouldFocusOnMount && this.searchInput) {
+      InteractionManager.runAfterInteractions(() => {
+        this.searchInput.focus()
+      });
+    }
   }
 
   get dataSource () {
@@ -111,6 +115,7 @@ export default class CountrySelection extends React.Component {
               <View style={styles.searchView}>
                 <Image source={SearchIcon} style={styles.searchIcon} />
                 <TextInput
+                  blurOnSubmit={false}
                   ref={(input) => this.searchInput = input}
                   style={[styles.textInput, searchTextInputStyles]}
                   enablesReturnKeyAutomatically
