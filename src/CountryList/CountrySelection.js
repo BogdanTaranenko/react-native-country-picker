@@ -56,7 +56,10 @@ export default class CountrySelection extends React.Component {
   }
 
   get dataSource () {
-    const { showCurrency, countryCodesWhiteList } = this.props
+    const { showCurrency, countryCodesWhiteList, data } = this.props
+    if (data) {
+      return data
+    }
     const dataSource = showCurrency ? currencyCountries: countries
     if (!countryCodesWhiteList || !countryCodesWhiteList.length) {
       return dataSource
